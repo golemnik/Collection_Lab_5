@@ -11,4 +11,5 @@ VIP
 123
 BAR
 123
+show
 execute_script test\script.txt

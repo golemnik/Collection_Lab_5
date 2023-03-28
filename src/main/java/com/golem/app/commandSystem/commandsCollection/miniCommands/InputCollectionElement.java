@@ -46,6 +46,7 @@ public class InputCollectionElement {
         do {
             try {
                 String value = scanner.input();
+                System.out.println(value);
                 if (value == null || value.equals("")) {
                     throw new WrongArgumentsException("Unsupported string for name. Try again.");
                 }

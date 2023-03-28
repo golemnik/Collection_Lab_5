@@ -23,6 +23,14 @@ public class Insert implements Command {
     public void process() {
         InputCollectionElement ice = new InputCollectionElement();
         Ticket ticket = ice.inputElement(scanner, new Ticket(), scanner.script());
+        if (!scanner.script()) {
+            try {
+                ticket.toReadString();
+            }
+            catch (Exception e) {
+                return;
+            }
+        }
         ticket.setCreationDate(LocalDate.now());
         collection.getCollection().put(ticketKey, ticket);
         ticket.getVenue().setId(GenerateID.generate(collection));

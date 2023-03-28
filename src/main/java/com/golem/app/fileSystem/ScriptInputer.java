@@ -15,6 +15,7 @@ public class ScriptInputer implements Input{
             while ((character = bif.read())!=-1) {
                 sym = (char)character;
                 if (sym == '\n') {
+                    line = line.trim();
                     inputLines.add(line);
                     line = "";
                 }
@@ -36,6 +37,7 @@ public class ScriptInputer implements Input{
     @Override
     public String input() {
         String input;
+//        System.out.println(inputLines);
         if (inputLines.size() > 0) {
             input = inputLines.get(0);
             inputLines.remove(0);
