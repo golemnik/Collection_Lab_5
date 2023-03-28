@@ -1,0 +1,68 @@
+{
+  "creationDate": "2023-03-28",
+  "collection": {
+    "1": {
+      "id": -1,
+      "name": "unnamed",
+      "coordinates": {
+        "x": 0,
+        "y": 0
+      },
+      "creationDate": "2023-03-28",
+      "price": 0.0,
+      "comment": "no comments",
+      "type": "CHEAP",
+      "venue": {
+        "id": -1,
+        "name": "unnamed Venue",
+        "capacity": 0,
+        "type": "BAR",
+        "address": {
+          "street": "unknown street"
+        }
+      }
+    },
+    "2": {
+      "id": -1,
+      "name": "unnamed",
+      "coordinates": {
+        "x": 0,
+        "y": 0
+      },
+      "creationDate": "2023-03-28",
+      "price": 0.0,
+      "comment": "no comments",
+      "type": "CHEAP",
+      "venue": {
+        "id": -1,
+        "name": "unnamed Venue",
+        "capacity": 0,
+        "type": "BAR",
+        "address": {
+          "street": "unknown street"
+        }
+      }
+    },
+    "3": {
+      "id": -1,
+      "name": "unnamed",
+      "coordinates": {
+        "x": 0,
+        "y": 0
+      },
+      "creationDate": "2023-03-28",
+      "price": 0.0,
+      "comment": "no comments",
+      "type": "CHEAP",
+      "venue": {
+        "id": -1,
+        "name": "unnamed Venue",
+        "capacity": 0,
+        "type": "BAR",
+        "address": {
+          "street": "unknown street"
+        }
+      }
+    }
+  }
+}
