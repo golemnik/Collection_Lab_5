@@ -1,14 +1,16 @@
-package com.golem.app.commandSystem.commandsCollection;
+package com.golem.app.commandSystem;
 
 import com.golem.app.collection.TicketCollection;
 import com.golem.app.commandSystem.Command;
 import com.golem.app.commandSystem.commandExceptions.WrongArgumentsException;
 import com.golem.app.commandSystem.commandExceptions.WrongCommandException;
-import com.golem.app.commandSystem.commandsCollection.done.*;
+import com.golem.app.commandSystem.commandsCollection.*;
 import com.golem.app.commandSystem.commandsSystem.Exit;
 import com.golem.app.commandSystem.commandsSystem.Help;
 import com.golem.app.commandSystem.commandsSystem.Save;
 import com.golem.app.commandSystem.commandsSystem.UnDone.ExecuteScript;
+import com.golem.app.fileSystem.ConsoleInputer;
+import com.golem.app.fileSystem.Input;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -38,13 +40,13 @@ public class CommandCreator {
         commands.put("execute_script", new ExecuteScript(openedScripts, this));
     }
 
-    public Command create (String string) throws WrongCommandException, WrongArgumentsException {
+    public Command create (String string, Input inputer) throws WrongCommandException, WrongArgumentsException {
         List<String> input = new ArrayList<>(Arrays.asList(string.trim().split(" ")));
         if (commands.get(input.get(0)) == null) {
             throw new WrongCommandException();
         }
         String command = input.get(0);
         input.remove(0);
-        return commands.get(command).args(input);
+        return commands.get(command).args(input, inputer);
     }
 }

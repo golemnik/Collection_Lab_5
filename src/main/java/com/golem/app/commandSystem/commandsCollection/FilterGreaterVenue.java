@@ -7,6 +7,7 @@ import com.golem.app.commandSystem.Command;
 import com.golem.app.commandSystem.commandExceptions.WrongArgumentsException;
 import com.golem.app.commandSystem.commandsCollection.miniCommands.InputCollectionElement;
 import com.golem.app.fileSystem.ConsolePrinter;
+import com.golem.app.fileSystem.Input;
 
 import java.util.List;
 import java.util.Scanner;
@@ -14,10 +15,9 @@ import java.util.Scanner;
 public class FilterGreaterVenue implements Command {
     private final TicketCollection collection;
     private final InputCollectionElement ice = new InputCollectionElement();
-    private final Scanner scanner;
+    private Input scanner;
     public FilterGreaterVenue (TicketCollection collection) {
         this.collection = collection;
-        this.scanner = new Scanner(System.in);
     }
     @Override
     public void process() {
@@ -30,8 +30,9 @@ public class FilterGreaterVenue implements Command {
     }
 
     @Override
-    public Command args(List<String> args) throws WrongArgumentsException {
+    public Command args(List<String> args, Input inputer) throws WrongArgumentsException {
         if (args.size() != 0) throw  new WrongArgumentsException();
+        scanner = inputer;
         return this;
     }
 

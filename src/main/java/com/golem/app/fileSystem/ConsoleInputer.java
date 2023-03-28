@@ -7,6 +7,12 @@ public class ConsoleInputer implements Input {
     public ConsoleInputer() {
         scanner = new Scanner(System.in);
     }
+
+    @Override
+    public boolean script() {
+        return true;
+    }
+
     @Override
     public String input() {
         return scanner.nextLine();

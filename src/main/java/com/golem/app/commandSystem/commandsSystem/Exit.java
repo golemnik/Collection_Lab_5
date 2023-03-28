@@ -3,6 +3,7 @@ package com.golem.app.commandSystem.commandsSystem;
 import com.golem.app.commandSystem.Command;
 import com.golem.app.commandSystem.commandExceptions.WrongArgumentsException;
 import com.golem.app.fileSystem.ConsolePrinter;
+import com.golem.app.fileSystem.Input;
 
 import java.util.List;
 
@@ -13,7 +14,7 @@ public class Exit implements Command {
     }
 
     @Override
-    public Command args(List<String> args) throws WrongArgumentsException {
+    public Command args(List<String> args, Input inputer) throws WrongArgumentsException {
         if (args.size() != 0) throw  new WrongArgumentsException();
         return this;
     }

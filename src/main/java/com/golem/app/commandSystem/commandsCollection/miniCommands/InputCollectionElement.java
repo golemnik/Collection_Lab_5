@@ -6,11 +6,10 @@ import com.golem.app.collection.ticket.Ticket;
 import com.golem.app.collection.ticket.Venue;
 import com.golem.app.commandSystem.commandExceptions.WrongArgumentsException;
 import com.golem.app.fileSystem.ConsolePrinter;
-
-import java.util.Scanner;
+import com.golem.app.fileSystem.Input;
 
 public class InputCollectionElement {
-    public Ticket inputElement(Scanner scanner, Ticket ticket, boolean comment) {
+    public Ticket inputElement(Input scanner, Ticket ticket, boolean comment) {
         tName(scanner, ticket, comment);
         tPrice(scanner, ticket, comment);
         tComment(scanner, ticket, comment);
@@ -32,14 +31,13 @@ public class InputCollectionElement {
         return ticket;
     }
 
-    public Venue inputVenue (Scanner scanner, Venue venue, boolean comment) {
+    public Venue inputVenue (Input scanner, Venue venue, boolean comment) {
         tVenueName(scanner, venue, comment);
         tVenueCapacity(scanner, venue, comment);
         tVenueType(scanner, venue, comment);
         return venue;
     }
-
-    private void tName(Scanner scanner, Ticket ticket, boolean comment) {
+    private void tName(Input scanner, Ticket ticket, boolean comment) {
         if (comment) {
             ConsolePrinter.out("Type ticket name. It can't be " +
                     ConsolePrinter.PURPLE("null") + " or " +
@@ -47,7 +45,7 @@ public class InputCollectionElement {
         }
         do {
             try {
-                String value = scanner.nextLine();
+                String value = scanner.input();
                 if (value == null || value.equals("")) {
                     throw new WrongArgumentsException("Unsupported string for name. Try again.");
                 }
@@ -61,7 +59,7 @@ public class InputCollectionElement {
             }
         } while (comment);
     }
-    private void tPrice (Scanner scanner, Ticket ticket, boolean comment) {
+    private void tPrice (Input scanner, Ticket ticket, boolean comment) {
         if (comment) {
             ConsolePrinter.out("Type ticket price. It must be greater than " +
                     ConsolePrinter.PURPLE("0") + ", but could be " +
@@ -69,10 +67,10 @@ public class InputCollectionElement {
         }
         do {
             try {
-                String value = scanner.nextLine();
+                String value = scanner.input();
                 double tempValue = Double.parseDouble(value);
                 if (tempValue <= 0 || tempValue == Double.POSITIVE_INFINITY) {
-                    throw new WrongArgumentsException("Input price is less than zero. Try again.");
+                    throw new WrongArgumentsException("Input price is less than zero or INFINITY. Try again.");
                 }
                 ticket.setPrice(tempValue);
                 comment = false;
@@ -87,7 +85,7 @@ public class InputCollectionElement {
             }
         } while (comment);
     }
-    private void tComment (Scanner scanner, Ticket ticket, boolean comment) {
+    private void tComment (Input scanner, Ticket ticket, boolean comment) {
         if (comment) {
             ConsolePrinter.out("Type comment to this ticket. It can't be " +
                     ConsolePrinter.PURPLE("null") + " or " +
@@ -95,7 +93,7 @@ public class InputCollectionElement {
         }
         do {
             try {
-                String value = scanner.nextLine();
+                String value = scanner.input();
                 if (value == null || value.equals("")) {
                     throw new WrongArgumentsException("Unsupported string for comment. Try again.");
                 }
@@ -110,7 +108,7 @@ public class InputCollectionElement {
         } while (comment);
 
     }
-    private void tType (Scanner scanner, Ticket ticket, boolean comment) {
+    private void tType (Input scanner, Ticket ticket, boolean comment) {
         if (comment) {
             String temp = "";
             for (Ticket.TicketType t : Ticket.TicketType.values()) {
@@ -120,7 +118,7 @@ public class InputCollectionElement {
                     temp + "Write chosen type:");
         }
         do {
-            String value = scanner.nextLine();
+            String value = scanner.input();
             try {
                 ticket.setType(Ticket.TicketType.valueOf(value));
                 comment = false;
@@ -132,7 +130,7 @@ public class InputCollectionElement {
             }
         }while (comment);
     }
-    private void tCoordinatesX (Scanner scanner, Coordinates coord, boolean comment) {
+    private void tCoordinatesX (Input scanner, Coordinates coord, boolean comment) {
         if (comment) {
             ConsolePrinter.out("Type ticket " +
                     ConsolePrinter.BLUE("x") +
@@ -142,7 +140,7 @@ public class InputCollectionElement {
         }
         do {
             try {
-                String value = scanner.nextLine();
+                String value = scanner.input();
                 coord.setX(Long.parseLong(value));
                 comment = false;
             } catch (Exception e) {
@@ -152,7 +150,7 @@ public class InputCollectionElement {
             }
         } while (comment);
     }
-    private void tCoordinatesY (Scanner scanner, Coordinates coord, boolean comment) {
+    private void tCoordinatesY (Input scanner, Coordinates coord, boolean comment) {
         if (comment) {
             ConsolePrinter.out("Type ticket " +
                     ConsolePrinter.BLUE("y") +
@@ -163,7 +161,7 @@ public class InputCollectionElement {
         }
         do {
             try {
-                String value = scanner.nextLine();
+                String value = scanner.input();
                 Long tempValue = Long.parseLong(value);
                 if (tempValue > 990) {
                     throw new WrongArgumentsException("Input y coordinate is too big. Try again.");
@@ -182,7 +180,7 @@ public class InputCollectionElement {
             }
         } while (comment);
     }
-    private void tVenueName (Scanner scanner, Venue venue, boolean comment) {
+    private void tVenueName (Input scanner, Venue venue, boolean comment) {
         if (comment) {
             ConsolePrinter.out("Type ticket's venue name. It can't be " +
                     ConsolePrinter.PURPLE("null") + " or " +
@@ -190,7 +188,7 @@ public class InputCollectionElement {
         }
         do {
             try {
-                String value = scanner.nextLine();
+                String value = scanner.input();
                 if (value == null || value.equals("")) {
                     throw new WrongArgumentsException("Unsupported string for name. Try again.");
                 }
@@ -204,7 +202,7 @@ public class InputCollectionElement {
             }
         } while (comment);
     }
-    private void tVenueCapacity (Scanner scanner, Venue venue, boolean comment) {
+    private void tVenueCapacity (Input scanner, Venue venue, boolean comment) {
         if (comment) {
             ConsolePrinter.out("Type ticket's venue capacity. It must be greater than " +
                     ConsolePrinter.PURPLE("0") + " and not " +
@@ -213,7 +211,7 @@ public class InputCollectionElement {
         }
         do {
             try {
-                String value = scanner.nextLine();
+                String value = scanner.input();
                 long tempValue = Long.parseLong(value);
                 if (tempValue <= 0) {
                     throw new WrongArgumentsException("Input capacity is less than zero. Try again.");
@@ -231,7 +229,7 @@ public class InputCollectionElement {
             }
         } while (comment);
     }
-    private void tVenueType (Scanner scanner, Venue venue, boolean comment) {
+    private void tVenueType (Input scanner, Venue venue, boolean comment) {
         if (comment) {
             String temp = "";
             for (Venue.VenueType t : Venue.VenueType.values()) {
@@ -241,7 +239,7 @@ public class InputCollectionElement {
                     temp + "Write chosen type:");
         }
         do {
-            String value = scanner.nextLine();
+            String value = scanner.input();
             try {
                 venue.setType(Venue.VenueType.valueOf(value));
                 comment = false;
@@ -253,14 +251,14 @@ public class InputCollectionElement {
             }
         } while (comment);
     }
-    private void tAddress(Scanner scanner, Address address, boolean comment) {
+    private void tAddress(Input scanner, Address address, boolean comment) {
         if (comment) {
             ConsolePrinter.out("Type ticket's venue address. It can't be " +
                     ConsolePrinter.PURPLE("null") + ":");
         }
         do {
             try {
-                String value = scanner.nextLine();
+                String value = scanner.input();
                 if (value == null) {
                     throw new WrongArgumentsException("Unsupported string for name. Try again.");
                 }

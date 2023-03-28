@@ -3,6 +3,7 @@ package com.golem.app.commandSystem.commandsSystem;
 import com.golem.app.collection.TicketCollection;
 import com.golem.app.commandSystem.Command;
 import com.golem.app.commandSystem.commandExceptions.WrongArgumentsException;
+import com.golem.app.fileSystem.Input;
 import com.golem.app.fileSystem.JsonParser;
 
 import java.util.List;
@@ -22,7 +23,7 @@ public class Save implements Command {
     }
 
     @Override
-    public Command args(List<String> args) throws WrongArgumentsException {
+    public Command args(List<String> args, Input inputer) throws WrongArgumentsException {
         if (args.size() != 0) throw new WrongArgumentsException();
         return this;
     }

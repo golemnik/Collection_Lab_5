@@ -1,0 +1,14 @@
+test
+help
+insert 123
+123
+123
+123
+VIP
+123
+123
+123
+123
+BAR
+123
+execute_script test\script.txt

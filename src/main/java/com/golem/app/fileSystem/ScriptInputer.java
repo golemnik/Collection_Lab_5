@@ -27,6 +27,12 @@ public class ScriptInputer implements Input{
             ConsolePrinter.out(e.getMessage());
         }
     }
+
+    @Override
+    public boolean script() {
+        return false;
+    }
+
     @Override
     public String input() {
         String input;

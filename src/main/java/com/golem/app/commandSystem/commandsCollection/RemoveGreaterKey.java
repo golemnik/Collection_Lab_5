@@ -1,8 +1,10 @@
-package com.golem.app.commandSystem.commandsCollection.done;
+package com.golem.app.commandSystem.commandsCollection;
 
 import com.golem.app.collection.TicketCollection;
 import com.golem.app.commandSystem.Command;
 import com.golem.app.commandSystem.commandExceptions.WrongArgumentsException;
+import com.golem.app.fileSystem.Input;
+
 import java.util.List;
 
 public class RemoveGreaterKey implements Command {
@@ -19,7 +21,7 @@ public class RemoveGreaterKey implements Command {
     }
 
     @Override
-    public Command args(List<String> args) throws WrongArgumentsException {
+    public Command args(List<String> args, Input inputer) throws WrongArgumentsException {
         if (args.size() != 1) throw new WrongArgumentsException();
         ticketKey = args.get(0);
         return this;
