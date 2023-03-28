@@ -71,7 +71,7 @@ public class InputCollectionElement {
             try {
                 String value = scanner.nextLine();
                 double tempValue = Double.parseDouble(value);
-                if (tempValue <= 0) {
+                if (tempValue <= 0 || tempValue == Double.POSITIVE_INFINITY) {
                     throw new WrongArgumentsException("Input price is less than zero. Try again.");
                 }
                 ticket.setPrice(tempValue);
