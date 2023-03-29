@@ -6,11 +6,11 @@ import com.golem.app.commandSystem.Command;
 import com.golem.app.commandSystem.commandExceptions.WrongArgumentsException;
 import com.golem.app.commandSystem.commandsCollection.miniCommands.GenerateID;
 import com.golem.app.commandSystem.commandsCollection.miniCommands.InputCollectionElement;
+import com.golem.app.fileSystem.ConsolePrinter;
 import com.golem.app.fileSystem.Input;
 
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Scanner;
 
 public class RemoveGreater implements Command {
     private final TicketCollection collection;
@@ -22,7 +22,13 @@ public class RemoveGreater implements Command {
     @Override
     public void process() {
         InputCollectionElement ice = new InputCollectionElement();
-        Ticket ticket = ice.inputElement(scanner, new Ticket(), scanner.script());
+        Ticket ticket;
+        try {
+            ticket = ice.inputElement(scanner, new Ticket(), scanner.script());
+        } catch (WrongArgumentsException e) {
+            ConsolePrinter.out("RemoveGreater failed due: " + ConsolePrinter.YELLOW(e.getMessage()));
+            return;
+        }
         ticket.setCreationDate(LocalDate.now());
         ticket.getVenue().setId(GenerateID.generate(collection));
         ticket.setId(GenerateID.generate(collection));

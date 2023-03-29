@@ -6,11 +6,11 @@ import com.golem.app.commandSystem.Command;
 import com.golem.app.commandSystem.commandExceptions.WrongArgumentsException;
 import com.golem.app.commandSystem.commandsCollection.miniCommands.GenerateID;
 import com.golem.app.commandSystem.commandsCollection.miniCommands.InputCollectionElement;
+import com.golem.app.fileSystem.ConsolePrinter;
 import com.golem.app.fileSystem.Input;
 
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Scanner;
 
 public class Insert implements Command {
     private final TicketCollection collection;
@@ -22,14 +22,12 @@ public class Insert implements Command {
     @Override
     public void process() {
         InputCollectionElement ice = new InputCollectionElement();
-        Ticket ticket = ice.inputElement(scanner, new Ticket(), scanner.script());
-        if (!scanner.script()) {
-            try {
-                ticket.toReadString();
-            }
-            catch (Exception e) {
-                return;
-            }
+        Ticket ticket;
+        try {
+            ticket = ice.inputElement(scanner, new Ticket(), scanner.script());
+        } catch (WrongArgumentsException e) {
+            ConsolePrinter.out("Insert failed due: " + ConsolePrinter.YELLOW(e.getMessage()));
+            return;
         }
         ticket.setCreationDate(LocalDate.now());
         collection.getCollection().put(ticketKey, ticket);

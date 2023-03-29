@@ -1,4 +1,4 @@
-package com.golem.app.commandSystem.commandsSystem.UnDone;
+package com.golem.app.commandSystem.commandsSystem;
 
 import com.golem.app.commandSystem.Command;
 import com.golem.app.commandSystem.commandExceptions.WrongArgumentsException;
@@ -11,7 +11,6 @@ import java.util.List;
 
 public class ExecuteScript implements Command {
     private String file;
-    private Input scanner;
     private final List<String> openedScripts;
     private final CommandCreator creator;
     private ScriptInputer scriptInputer;
@@ -25,10 +24,11 @@ public class ExecuteScript implements Command {
         do {
             input = scriptInputer.input();
             if (input == null) {
+                openedScripts.remove(file);
                 return;
             }
             try {
-                creator.create(input, scanner).process();
+                creator.create(input, scriptInputer).process();
             }
             catch (Exception e) {
                 ConsolePrinter.out(e.getMessage());
@@ -40,7 +40,6 @@ public class ExecuteScript implements Command {
     public Command args(List<String> args, Input inputer) throws WrongArgumentsException {
         if (args.size() != 1) throw new WrongArgumentsException();
         file = args.get(0);
-        scanner = new ScriptInputer(file);
         for (String s : openedScripts) {
             if (s.equals(file)) throw new WrongArgumentsException("This file already opened.");
         }

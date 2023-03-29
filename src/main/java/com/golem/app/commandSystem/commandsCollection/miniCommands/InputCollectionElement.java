@@ -9,12 +9,11 @@ import com.golem.app.fileSystem.ConsolePrinter;
 import com.golem.app.fileSystem.Input;
 
 public class InputCollectionElement {
-    public Ticket inputElement(Input scanner, Ticket ticket, boolean comment) {
+    public Ticket inputElement(Input scanner, Ticket ticket, boolean comment) throws WrongArgumentsException {
         tName(scanner, ticket, comment);
         tPrice(scanner, ticket, comment);
         tComment(scanner, ticket, comment);
         tType(scanner, ticket, comment);
-
         Coordinates coord = new Coordinates();
         tCoordinatesX(scanner, coord, comment);
         tCoordinatesY(scanner, coord, comment);
@@ -31,13 +30,13 @@ public class InputCollectionElement {
         return ticket;
     }
 
-    public Venue inputVenue (Input scanner, Venue venue, boolean comment) {
+    public Venue inputVenue (Input scanner, Venue venue, boolean comment) throws WrongArgumentsException {
         tVenueName(scanner, venue, comment);
         tVenueCapacity(scanner, venue, comment);
         tVenueType(scanner, venue, comment);
         return venue;
     }
-    private void tName(Input scanner, Ticket ticket, boolean comment) {
+    private void tName(Input scanner, Ticket ticket, boolean comment) throws WrongArgumentsException {
         if (comment) {
             ConsolePrinter.out("Type ticket name. It can't be " +
                     ConsolePrinter.PURPLE("null") + " or " +
@@ -57,10 +56,13 @@ public class InputCollectionElement {
                 if (comment) {
                     ConsolePrinter.out(e.getMessage());
                 }
+                else {
+                    throw new WrongArgumentsException("Script mistake input.");
+                }
             }
         } while (comment);
     }
-    private void tPrice (Input scanner, Ticket ticket, boolean comment) {
+    private void tPrice (Input scanner, Ticket ticket, boolean comment) throws WrongArgumentsException {
         if (comment) {
             ConsolePrinter.out("Type ticket price. It must be greater than " +
                     ConsolePrinter.PURPLE("0") + ", but could be " +
@@ -79,14 +81,20 @@ public class InputCollectionElement {
                 if (comment) {
                     ConsolePrinter.out(e.getMessage());
                 }
+                else {
+                    throw new WrongArgumentsException("Script mistake input.");
+                }
             } catch (Exception e) {
                 if (comment) {
                     ConsolePrinter.out("Input value isn't a number. Try again.");
                 }
+                else {
+                    throw new WrongArgumentsException("Script mistake input.");
+                }
             }
         } while (comment);
     }
-    private void tComment (Input scanner, Ticket ticket, boolean comment) {
+    private void tComment (Input scanner, Ticket ticket, boolean comment) throws WrongArgumentsException {
         if (comment) {
             ConsolePrinter.out("Type comment to this ticket. It can't be " +
                     ConsolePrinter.PURPLE("null") + " or " +
@@ -105,11 +113,14 @@ public class InputCollectionElement {
                 if (comment) {
                     ConsolePrinter.out(e.getMessage());
                 }
+                else {
+                    throw new WrongArgumentsException("Script mistake input.");
+                }
             }
         } while (comment);
 
     }
-    private void tType (Input scanner, Ticket ticket, boolean comment) {
+    private void tType (Input scanner, Ticket ticket, boolean comment) throws WrongArgumentsException {
         if (comment) {
             String temp = "";
             for (Ticket.TicketType t : Ticket.TicketType.values()) {
@@ -128,10 +139,13 @@ public class InputCollectionElement {
                 if (comment) {
                     ConsolePrinter.out("Unsupported type was chosen. Try again.");
                 }
+                else {
+                    throw new WrongArgumentsException("Script mistake input.");
+                }
             }
         }while (comment);
     }
-    private void tCoordinatesX (Input scanner, Coordinates coord, boolean comment) {
+    private void tCoordinatesX (Input scanner, Coordinates coord, boolean comment) throws WrongArgumentsException {
         if (comment) {
             ConsolePrinter.out("Type ticket " +
                     ConsolePrinter.BLUE("x") +
@@ -148,10 +162,13 @@ public class InputCollectionElement {
                 if (comment) {
                     ConsolePrinter.out("Input value isn't a number for long format. Try again.");
                 }
+                else {
+                    throw new WrongArgumentsException("Script mistake input.");
+                }
             }
         } while (comment);
     }
-    private void tCoordinatesY (Input scanner, Coordinates coord, boolean comment) {
+    private void tCoordinatesY (Input scanner, Coordinates coord, boolean comment) throws WrongArgumentsException {
         if (comment) {
             ConsolePrinter.out("Type ticket " +
                     ConsolePrinter.BLUE("y") +
@@ -173,15 +190,21 @@ public class InputCollectionElement {
                 if (comment) {
                     ConsolePrinter.out(e.getMessage());
                 }
+                else {
+                    throw new WrongArgumentsException("Script mistake input.");
+                }
             }
             catch (Exception e) {
                 if (comment) {
                     ConsolePrinter.out("Input value isn't a number for long format. Try again.");
                 }
+                else {
+                    throw new WrongArgumentsException("Script mistake input.");
+                }
             }
         } while (comment);
     }
-    private void tVenueName (Input scanner, Venue venue, boolean comment) {
+    private void tVenueName (Input scanner, Venue venue, boolean comment) throws WrongArgumentsException {
         if (comment) {
             ConsolePrinter.out("Type ticket's venue name. It can't be " +
                     ConsolePrinter.PURPLE("null") + " or " +
@@ -200,10 +223,13 @@ public class InputCollectionElement {
                 if (comment) {
                     ConsolePrinter.out(e.getMessage());
                 }
+                else {
+                    throw new WrongArgumentsException("Script mistake input.");
+                }
             }
         } while (comment);
     }
-    private void tVenueCapacity (Input scanner, Venue venue, boolean comment) {
+    private void tVenueCapacity (Input scanner, Venue venue, boolean comment) throws WrongArgumentsException {
         if (comment) {
             ConsolePrinter.out("Type ticket's venue capacity. It must be greater than " +
                     ConsolePrinter.PURPLE("0") + " and not " +
@@ -223,14 +249,20 @@ public class InputCollectionElement {
                 if (comment) {
                     ConsolePrinter.out(e.getMessage());
                 }
+                else {
+                    throw new WrongArgumentsException("Script mistake input.");
+                }
             } catch (Exception e) {
                 if (comment) {
                     ConsolePrinter.out("Input value isn't a number. Try again.");
                 }
+                else {
+                    throw new WrongArgumentsException("Script mistake input.");
+                }
             }
         } while (comment);
     }
-    private void tVenueType (Input scanner, Venue venue, boolean comment) {
+    private void tVenueType (Input scanner, Venue venue, boolean comment) throws WrongArgumentsException {
         if (comment) {
             String temp = "";
             for (Venue.VenueType t : Venue.VenueType.values()) {
@@ -249,10 +281,13 @@ public class InputCollectionElement {
                 if (comment) {
                     ConsolePrinter.out("Unsupported type was chosen. Try again.");
                 }
+                else {
+                    throw new WrongArgumentsException("Script mistake input.");
+                }
             }
         } while (comment);
     }
-    private void tAddress(Input scanner, Address address, boolean comment) {
+    private void tAddress(Input scanner, Address address, boolean comment) throws WrongArgumentsException {
         if (comment) {
             ConsolePrinter.out("Type ticket's venue address. It can't be " +
                     ConsolePrinter.PURPLE("null") + ":");
@@ -269,6 +304,9 @@ public class InputCollectionElement {
             catch (Exception e) {
                 if (comment) {
                     ConsolePrinter.out(e.getMessage());
+                }
+                else {
+                    throw new WrongArgumentsException("Script mistake input.");
                 }
             }
         } while (comment);

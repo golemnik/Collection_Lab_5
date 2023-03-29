@@ -21,7 +21,13 @@ public class FilterGreaterVenue implements Command {
     }
     @Override
     public void process() {
-        Venue venue = ice.inputVenue(scanner, new Venue(), true);
+        Venue venue;
+        try {
+            venue = ice.inputVenue(scanner, new Venue(), true);
+        } catch (WrongArgumentsException e) {
+            ConsolePrinter.out("Insert failed due: " + ConsolePrinter.YELLOW(e.getMessage()));
+            return;
+        }
         for (Ticket t : collection.getCollection().values()) {
             if (t.getVenue().compareTo(venue) > 0) {
                 ConsolePrinter.out(t.toReadString() + "\n");

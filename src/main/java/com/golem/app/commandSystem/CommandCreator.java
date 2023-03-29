@@ -1,15 +1,13 @@
 package com.golem.app.commandSystem;
 
 import com.golem.app.collection.TicketCollection;
-import com.golem.app.commandSystem.Command;
 import com.golem.app.commandSystem.commandExceptions.WrongArgumentsException;
 import com.golem.app.commandSystem.commandExceptions.WrongCommandException;
 import com.golem.app.commandSystem.commandsCollection.*;
 import com.golem.app.commandSystem.commandsSystem.Exit;
 import com.golem.app.commandSystem.commandsSystem.Help;
 import com.golem.app.commandSystem.commandsSystem.Save;
-import com.golem.app.commandSystem.commandsSystem.UnDone.ExecuteScript;
-import com.golem.app.fileSystem.ConsoleInputer;
+import com.golem.app.commandSystem.commandsSystem.ExecuteScript;
 import com.golem.app.fileSystem.Input;
 
 import java.util.ArrayList;

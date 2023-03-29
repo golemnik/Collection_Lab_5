@@ -37,7 +37,6 @@ public class ScriptInputer implements Input{
     @Override
     public String input() {
         String input;
-//        System.out.println(inputLines);
         if (inputLines.size() > 0) {
             input = inputLines.get(0);
             inputLines.remove(0);
