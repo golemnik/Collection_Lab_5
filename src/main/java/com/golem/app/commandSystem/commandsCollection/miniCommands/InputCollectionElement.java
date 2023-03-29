@@ -45,7 +45,6 @@ public class InputCollectionElement {
         do {
             try {
                 String value = scanner.input();
-                System.out.println(value);
                 if (value == null || value.equals("")) {
                     throw new WrongArgumentsException("Unsupported string for name. Try again.");
                 }
@@ -72,8 +71,14 @@ public class InputCollectionElement {
             try {
                 String value = scanner.input();
                 double tempValue = Double.parseDouble(value);
-                if (tempValue <= 0 || tempValue == Double.POSITIVE_INFINITY) {
-                    throw new WrongArgumentsException("Input price is less than zero or INFINITY. Try again.");
+                if (tempValue <= 0) {
+                    throw new WrongArgumentsException("Input price can't be less or equal to zero. Try again.");
+                }
+                if (tempValue == Double.POSITIVE_INFINITY){
+                    throw new WrongArgumentsException("Input price can't be INFINITY. Try again.");
+                }
+                if (Double.isNaN(tempValue)) {
+                    throw new WrongArgumentsException("Input price can't be NaN. Try again.");
                 }
                 ticket.setPrice(tempValue);
                 comment = false;
