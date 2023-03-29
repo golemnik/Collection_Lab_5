@@ -21,7 +21,9 @@ public class TicketCollection implements ConsoleRead{
     public LinkedHashMap<String, Ticket> getCollection() {
         return collection;
     }
-
+    {
+        creationDate=LocalDate.now();
+    }
     public TicketCollection() {}
     public TicketCollection(boolean init) {
         if (init) testLoad();
@@ -35,8 +37,8 @@ public class TicketCollection implements ConsoleRead{
 
     public String toReadString() {
         return  "Collection:\n" +
-                "Create date: " + creationDate.toString() + "\n" +
-                "Collection type: " + collection.getClass().getSimpleName() + "\n"+
-                "Object amount: " + collection.size() + "\n";
+                "   Create date: " + creationDate.toString() + "\n" +
+                "   Collection type: " + collection.getClass().getSimpleName() + "\n"+
+                "   Object amount: " + collection.size() + "\n";
     }
 }

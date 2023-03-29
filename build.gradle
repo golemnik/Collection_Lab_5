@@ -3,7 +3,7 @@ plugins {
 }
 
 group 'com.golem.app'
-version '1.0-SNAPSHOT'
+version 'L5'
 
 repositories {
     mavenCentral()
