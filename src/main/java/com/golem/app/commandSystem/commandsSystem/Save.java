@@ -3,6 +3,7 @@ package com.golem.app.commandSystem.commandsSystem;
 import com.golem.app.collection.TicketCollection;
 import com.golem.app.commandSystem.Command;
 import com.golem.app.commandSystem.commandExceptions.WrongArgumentsException;
+import com.golem.app.fileSystem.ConsolePrinter;
 import com.golem.app.fileSystem.Input;
 import com.golem.app.fileSystem.JsonParser;
 
@@ -18,8 +19,17 @@ public class Save implements Command {
     }
     @Override
     public void process() {
-        jp = new JsonParser(file);
-        jp.parseSave(collection);
+        try {
+            jp = new JsonParser(file);
+            jp.parseSave(collection);
+        }
+        catch (Exception e) {
+            ConsolePrinter.out(e.getMessage() +
+                    "\nDue error to save in file, collection will be saved in system file <<save.json>>");
+            jp = new JsonParser("save.json");
+            jp.parseSave(collection);
+        }
+
     }
 
     @Override

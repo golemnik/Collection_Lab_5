@@ -16,10 +16,13 @@ public class AppCycle {
     private final ConsoleInputer consoleInputer = new ConsoleInputer();
     public AppCycle (String file) {
         inputer = new ConsoleInputer();
-        TicketCollection ticketCollection;
+        TicketCollection ticketCollection = null;
         if (file != null) {
             JsonParser jp = new JsonParser(file);
             ticketCollection = jp.parseLoad();
+            ConsolePrinter.out("file <<" + ConsolePrinter.RED(file) +
+                    ">> will be created and used for command " +
+                    ConsolePrinter.CYAN("save") + " to this collection.");
         }
         else {
             try {
@@ -28,10 +31,13 @@ public class AppCycle {
                 if (f.createNewFile()) {
                     ConsolePrinter.out("Created new file <<save.json>> by system, " +
                             "cause of invalid user's file path. Collection will be empty.");
+                    ticketCollection = new TicketCollection();
                 }
                 else {
-                    ConsolePrinter.out("Will be used system file <<save.json>>," +
+                    ConsolePrinter.out("Will be used existed system file <<save.json>>," +
                             " cause of no file input or invalid path.");
+                    JsonParser jp = new JsonParser(file);
+                    ticketCollection = jp.parseLoad();
                 }
             } catch (IOException ex) {
                 ConsolePrinter.out(ex.getMessage() + "\n" +
@@ -39,7 +45,6 @@ public class AppCycle {
                         " or input correct path to it, by starting the jar.");
                 System.exit(1);
             }
-            ticketCollection = new TicketCollection();
         }
         System.out.println(ticketCollection.toReadString());
         creator = new CommandCreator(file, ticketCollection);
