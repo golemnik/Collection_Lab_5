@@ -16,7 +16,7 @@ public class AppCycle {
     private final ConsoleInputer consoleInputer = new ConsoleInputer();
     public AppCycle (String file) {
         inputer = new ConsoleInputer();
-        TicketCollection ticketCollection = null;
+        TicketCollection ticketCollection = new TicketCollection();
         if (file != null) {
             JsonParser jp = new JsonParser(file);
             ticketCollection = jp.parseLoad();
@@ -38,6 +38,9 @@ public class AppCycle {
                             " cause of no file input or invalid path.");
                     JsonParser jp = new JsonParser(file);
                     ticketCollection = jp.parseLoad();
+                    if (ticketCollection == null) {
+                        ticketCollection = new TicketCollection();
+                    }
                 }
             } catch (IOException ex) {
                 ConsolePrinter.out(ex.getMessage() + "\n" +
@@ -46,7 +49,8 @@ public class AppCycle {
                 System.exit(1);
             }
         }
-        System.out.println(ticketCollection.toReadString());
+        ConsolePrinter.out("Init collection state:" +
+                ticketCollection.toReadString());
         creator = new CommandCreator(file, ticketCollection);
     }
 

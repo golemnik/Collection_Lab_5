@@ -23,12 +23,15 @@ public class FilterGreaterVenue implements Command {
     public void process() {
         Venue venue;
         try {
-            venue = ice.inputVenue(scanner, new Venue(), true);
+            venue = InputCollectionElement.inputVenue(scanner, new Venue(), true);
         } catch (WrongArgumentsException e) {
             ConsolePrinter.out("Insert failed due: " + ConsolePrinter.YELLOW(e.getMessage()));
             return;
         }
         for (Ticket t : collection.getCollection().values()) {
+            if (venue == null) {
+                continue;
+            }
             if (t.getVenue().compareTo(venue) > 0) {
                 ConsolePrinter.out(t.toReadString() + "\n");
             }

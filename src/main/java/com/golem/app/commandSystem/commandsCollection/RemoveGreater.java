@@ -21,17 +21,14 @@ public class RemoveGreater implements Command {
 
     @Override
     public void process() {
-        InputCollectionElement ice = new InputCollectionElement();
         Ticket ticket;
         try {
-            ticket = ice.inputElement(scanner, new Ticket(), scanner.script());
+            ticket = InputCollectionElement.inputElement(scanner, new Ticket(), scanner.script());
         } catch (WrongArgumentsException e) {
             ConsolePrinter.out("RemoveGreater failed due: " + ConsolePrinter.YELLOW(e.getMessage()));
             return;
         }
-        ticket.setCreationDate(LocalDate.now());
-        ticket.getVenue().setId(GenerateID.generate(collection));
-        ticket.setId(GenerateID.generate(collection));
+        InputCollectionElement.setID(collection, ticket);
         collection.getCollection().values().removeIf(t -> t.compareTo(ticket) > 0);
     }
 

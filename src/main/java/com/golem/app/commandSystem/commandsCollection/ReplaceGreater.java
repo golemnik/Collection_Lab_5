@@ -25,17 +25,14 @@ public class ReplaceGreater implements Command {
 
     @Override
     public void process() {
-        InputCollectionElement ice = new InputCollectionElement();
         Ticket ticket;
         try {
-            ticket = ice.inputElement(scanner, new Ticket(), scanner.script());
+            ticket = InputCollectionElement.inputElement(scanner, new Ticket(), scanner.script());
         } catch (WrongArgumentsException e) {
             ConsolePrinter.out("Replace greater failed due: " + ConsolePrinter.YELLOW(e.getMessage()));
             return;
         }
-        ticket.setCreationDate(LocalDate.now());
-        ticket.getVenue().setId(GenerateID.generate(collection));
-        ticket.setId(GenerateID.generate(collection));
+        InputCollectionElement.setID(collection, ticket);
         if (collection.getCollection().get(ticketKey).compareTo(ticket) <= 0 ) {
             collection.getCollection().replace(ticketKey,ticket);
         }

@@ -1,17 +1,21 @@
 package com.golem.app.commandSystem.commandsSystem;
 
 import com.golem.app.commandSystem.Command;
+import com.golem.app.commandSystem.commandExceptions.OpenedScriptFileException;
 import com.golem.app.commandSystem.commandExceptions.WrongArgumentsException;
 import com.golem.app.commandSystem.CommandCreator;
 import com.golem.app.fileSystem.ConsolePrinter;
 import com.golem.app.fileSystem.Input;
 import com.golem.app.fileSystem.ScriptInputer;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class ExecuteScript implements Command {
     private String file;
     private final List<String> openedScripts;
+    private final List <String> commandsQueue = new ArrayList<>();
     private final CommandCreator creator;
     private ScriptInputer scriptInputer;
     public ExecuteScript (List<String> openedScripts, CommandCreator creator) {
@@ -21,29 +25,32 @@ public class ExecuteScript implements Command {
     @Override
     public void process() {
         String input = "";
-        do {
-            input = scriptInputer.input();
-            if (input == null) {
-                openedScripts.remove(file);
-                return;
-            }
+        while ((input = scriptInputer.input()) != null) {
+            commandsQueue.add(input);
+        }
+        while (commandsQueue.size() > 0 && (input = commandsQueue.get(0)) != null) {
             try {
+                commandsQueue.remove(0);
                 creator.create(input, scriptInputer).process();
             }
             catch (Exception e) {
                 ConsolePrinter.out(e.getMessage());
             }
-        } while (true);
+        }
+        openedScripts.clear();
     }
 
     @Override
-    public Command args(List<String> args, Input inputer) throws WrongArgumentsException {
+    public Command args(List<String> args, Input inputer) throws WrongArgumentsException, OpenedScriptFileException {
         if (args.size() != 1) throw new WrongArgumentsException();
-        file = args.get(0);
         for (String s : openedScripts) {
-            if (s.equals(file)) throw new WrongArgumentsException("This file already opened.");
+            if (s.equals(args.get(0))) {
+                throw new OpenedScriptFileException();
+            }
         }
+        file = args.get(0);
         openedScripts.add(file);
+        ScriptInputer.addTail(commandsQueue);
         scriptInputer = new ScriptInputer(file);
         return this;
     }

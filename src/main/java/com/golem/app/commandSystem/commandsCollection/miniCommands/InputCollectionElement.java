@@ -1,5 +1,6 @@
 package com.golem.app.commandSystem.commandsCollection.miniCommands;
 
+import com.golem.app.collection.TicketCollection;
 import com.golem.app.collection.ticket.Address;
 import com.golem.app.collection.ticket.Coordinates;
 import com.golem.app.collection.ticket.Ticket;
@@ -8,8 +9,18 @@ import com.golem.app.commandSystem.commandExceptions.WrongArgumentsException;
 import com.golem.app.fileSystem.ConsolePrinter;
 import com.golem.app.fileSystem.Input;
 
+import java.time.LocalDate;
+
 public class InputCollectionElement {
-    public Ticket inputElement(Input scanner, Ticket ticket, boolean comment) throws WrongArgumentsException {
+    public static void setID (TicketCollection collection, Ticket ticket) {
+        if (ticket.getVenue() != null) {
+            ticket.getVenue().setId(GenerateID.generate(collection));
+        }
+        ticket.setId(GenerateID.generate(collection));
+    }
+    public static Ticket inputElement(Input scanner, Ticket ticket, boolean comment) throws WrongArgumentsException {
+        ticket.setCreationDate(LocalDate.now());
+
         tName(scanner, ticket, comment);
         tPrice(scanner, ticket, comment);
         tComment(scanner, ticket, comment);
@@ -22,21 +33,25 @@ public class InputCollectionElement {
         Venue venue = new Venue();
         venue = inputVenue(scanner, venue, comment);
 
-        Address address = new Address();
-        tAddress(scanner, address, comment);
-
-        venue.setAddress(address);
         ticket.setVenue(venue);
         return ticket;
     }
 
-    public Venue inputVenue (Input scanner, Venue venue, boolean comment) throws WrongArgumentsException {
-        tVenueName(scanner, venue, comment);
-        tVenueCapacity(scanner, venue, comment);
-        tVenueType(scanner, venue, comment);
-        return venue;
+    public static Venue inputVenue (Input scanner, Venue venue, boolean comment) throws WrongArgumentsException {
+        ConsolePrinter.out("Need to input Venue? Type yes for input. Other input - for no.");
+        if (scanner.input().equals("yes")) {
+            tVenueName(scanner, venue, comment);
+            tVenueCapacity(scanner, venue, comment);
+            tVenueType(scanner, venue, comment);
+            Address address = new Address();
+            tAddress(scanner, address, comment);
+
+            venue.setAddress(address);
+            return venue;
+        }
+        return null;
     }
-    private void tName(Input scanner, Ticket ticket, boolean comment) throws WrongArgumentsException {
+    private static void tName(Input scanner, Ticket ticket, boolean comment) throws WrongArgumentsException {
         if (comment) {
             ConsolePrinter.out("Type ticket name. It can't be " +
                     ConsolePrinter.PURPLE("null") + " or " +
@@ -61,7 +76,7 @@ public class InputCollectionElement {
             }
         } while (comment);
     }
-    private void tPrice (Input scanner, Ticket ticket, boolean comment) throws WrongArgumentsException {
+    private static void tPrice (Input scanner, Ticket ticket, boolean comment) throws WrongArgumentsException {
         if (comment) {
             ConsolePrinter.out("Type ticket price. It must be greater than " +
                     ConsolePrinter.PURPLE("0") + ", but could be " +
@@ -99,18 +114,15 @@ public class InputCollectionElement {
             }
         } while (comment);
     }
-    private void tComment (Input scanner, Ticket ticket, boolean comment) throws WrongArgumentsException {
+    private static void tComment (Input scanner, Ticket ticket, boolean comment) throws WrongArgumentsException {
         if (comment) {
-            ConsolePrinter.out("Type comment to this ticket. It can't be " +
+            ConsolePrinter.out("Type comment to this ticket. It can be " +
                     ConsolePrinter.PURPLE("null") + " or " +
                     ConsolePrinter.PURPLE("empty") + ":");
         }
         do {
             try {
                 String value = scanner.input();
-                if (value == null || value.equals("")) {
-                    throw new WrongArgumentsException("Unsupported string for comment. Try again.");
-                }
                 ticket.setComment(value);
                 comment = false;
             }
@@ -125,7 +137,7 @@ public class InputCollectionElement {
         } while (comment);
 
     }
-    private void tType (Input scanner, Ticket ticket, boolean comment) throws WrongArgumentsException {
+    private static void tType (Input scanner, Ticket ticket, boolean comment) throws WrongArgumentsException {
         if (comment) {
             String temp = "";
             for (Ticket.TicketType t : Ticket.TicketType.values()) {
@@ -150,7 +162,7 @@ public class InputCollectionElement {
             }
         }while (comment);
     }
-    private void tCoordinatesX (Input scanner, Coordinates coord, boolean comment) throws WrongArgumentsException {
+    private static void tCoordinatesX (Input scanner, Coordinates coord, boolean comment) throws WrongArgumentsException {
         if (comment) {
             ConsolePrinter.out("Type ticket " +
                     ConsolePrinter.BLUE("x") +
@@ -173,7 +185,7 @@ public class InputCollectionElement {
             }
         } while (comment);
     }
-    private void tCoordinatesY (Input scanner, Coordinates coord, boolean comment) throws WrongArgumentsException {
+    private static void tCoordinatesY (Input scanner, Coordinates coord, boolean comment) throws WrongArgumentsException {
         if (comment) {
             ConsolePrinter.out("Type ticket " +
                     ConsolePrinter.BLUE("y") +
@@ -209,7 +221,7 @@ public class InputCollectionElement {
             }
         } while (comment);
     }
-    private void tVenueName (Input scanner, Venue venue, boolean comment) throws WrongArgumentsException {
+    private static void tVenueName (Input scanner, Venue venue, boolean comment) throws WrongArgumentsException {
         if (comment) {
             ConsolePrinter.out("Type ticket's venue name. It can't be " +
                     ConsolePrinter.PURPLE("null") + " or " +
@@ -234,7 +246,7 @@ public class InputCollectionElement {
             }
         } while (comment);
     }
-    private void tVenueCapacity (Input scanner, Venue venue, boolean comment) throws WrongArgumentsException {
+    private static void tVenueCapacity (Input scanner, Venue venue, boolean comment) throws WrongArgumentsException {
         if (comment) {
             ConsolePrinter.out("Type ticket's venue capacity. It must be greater than " +
                     ConsolePrinter.PURPLE("0") + " and not " +
@@ -267,12 +279,13 @@ public class InputCollectionElement {
             }
         } while (comment);
     }
-    private void tVenueType (Input scanner, Venue venue, boolean comment) throws WrongArgumentsException {
+    private static void tVenueType (Input scanner, Venue venue, boolean comment) throws WrongArgumentsException {
         if (comment) {
             String temp = "";
             for (Venue.VenueType t : Venue.VenueType.values()) {
                 temp += "   " + ConsolePrinter.PURPLE(t.toString()) + "\n";
             }
+            temp += ConsolePrinter.PURPLE("null") + "\n";
             ConsolePrinter.out("Choose type for this ticket's venue. It can be one from the following list:\n" +
                     temp + "Write chosen type:");
         }
@@ -281,6 +294,11 @@ public class InputCollectionElement {
             try {
                 venue.setType(Venue.VenueType.valueOf(value));
                 comment = false;
+            }
+            catch (NullPointerException e) {
+                if (value == null) {
+                    venue.setType(null);
+                }
             }
             catch (Exception e) {
                 if (comment) {
@@ -292,7 +310,7 @@ public class InputCollectionElement {
             }
         } while (comment);
     }
-    private void tAddress(Input scanner, Address address, boolean comment) throws WrongArgumentsException {
+    private static void tAddress(Input scanner, Address address, boolean comment) throws WrongArgumentsException {
         if (comment) {
             ConsolePrinter.out("Type ticket's venue address. It can't be " +
                     ConsolePrinter.PURPLE("null") + ":");

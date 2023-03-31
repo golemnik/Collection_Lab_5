@@ -2,7 +2,7 @@ package com.golem.app.commandSystem.commandsCollection;
 
 import com.golem.app.collection.TicketCollection;
 import com.golem.app.collection.ticket.Ticket;
-import com.golem.app.collection.ticket.TicketTypeComparator;
+import com.golem.app.collection.ticket.InversedTicketTypeComparator;
 import com.golem.app.commandSystem.Command;
 import com.golem.app.commandSystem.commandExceptions.WrongArgumentsException;
 import com.golem.app.fileSystem.ConsolePrinter;
@@ -19,7 +19,7 @@ public class PrintFieldDescendingType implements Command {
     @Override
     public void process() {
         List<Ticket> list = new ArrayList<>(collection.getCollection().values());
-        list.sort(new TicketTypeComparator());
+        list.sort(new InversedTicketTypeComparator());
         for (Ticket t : list) {
             ConsolePrinter.out(t.getType().toString());
         }

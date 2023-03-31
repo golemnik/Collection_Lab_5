@@ -6,11 +6,11 @@ import java.util.ArrayList;
 
 public class GenerateID {
     public static int generate (TicketCollection collection) {
-        int id = 0;
+        int id = (int) System.currentTimeMillis();
         ArrayList<Integer> existId = new ArrayList<>();
         for (String s : collection.getCollection().keySet()) {
             Integer _int = collection.getCollection().get(s).getId();
-            if (_int != null) existId.add(_int);
+            existId.add(_int);
             _int = collection.getCollection().get(s).getVenue().getId();
             if (_int != null) existId.add(_int);
         }

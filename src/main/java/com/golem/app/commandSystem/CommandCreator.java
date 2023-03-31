@@ -1,6 +1,7 @@
 package com.golem.app.commandSystem;
 
 import com.golem.app.collection.TicketCollection;
+import com.golem.app.commandSystem.commandExceptions.OpenedScriptFileException;
 import com.golem.app.commandSystem.commandExceptions.WrongArgumentsException;
 import com.golem.app.commandSystem.commandExceptions.WrongCommandException;
 import com.golem.app.commandSystem.commandsCollection.*;
@@ -28,7 +29,7 @@ public class CommandCreator {
         commands.put("show", new Show(ticketCollection));
         commands.put("insert", new Insert(ticketCollection));
         commands.put("remove_key", new RemoveKey(ticketCollection));
-        commands.put("update_id", new UpdateId(ticketCollection));
+        commands.put("update", new UpdateId(ticketCollection));
         commands.put("save", new Save(ticketCollection, file));
         commands.put("remove_greater", new RemoveGreater(ticketCollection));
         commands.put("replace_greater", new ReplaceGreater(ticketCollection));
@@ -39,7 +40,7 @@ public class CommandCreator {
         commands.put("execute_script", new ExecuteScript(openedScripts, this));
     }
 
-    public Command create (String string, Input inputer) throws WrongCommandException, WrongArgumentsException {
+    public Command create (String string, Input inputer) throws WrongCommandException, WrongArgumentsException, OpenedScriptFileException {
         List<String> input = new ArrayList<>(Arrays.asList(string.trim().split(" ")));
         if (commands.get(input.get(0)) == null) {
             throw new WrongCommandException();

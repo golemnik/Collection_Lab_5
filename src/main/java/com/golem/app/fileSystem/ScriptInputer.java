@@ -6,7 +6,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ScriptInputer implements Input{
-    private final List<String> inputLines = new ArrayList<>();
+    private List<String> inputLines = new ArrayList<>();
+    private static List<String> tail = new ArrayList<>();
     public ScriptInputer (String file) {
         char sym;
         String line = "";
@@ -23,9 +24,21 @@ public class ScriptInputer implements Input{
                     line += sym;
                 }
             }
+            if (!line.equals("")) {
+                inputLines.add(line);
+            }
+            inputLines.addAll(tail);
+            tail.clear();
+            inputLines.add(null);
         }
         catch (Exception e) {
             ConsolePrinter.out(e.getMessage());
+        }
+    }
+    public static void addTail (List <String> tail) {
+        ScriptInputer.tail = tail;
+        if (tail.size() > 0 && tail.get(tail.size()-1)==null) {
+            tail.remove(tail.size()-1);
         }
     }
 

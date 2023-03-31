@@ -22,17 +22,14 @@ public class UpdateId implements Command {
     }
     @Override
     public void process() {
-        InputCollectionElement ice = new InputCollectionElement();
         Ticket ticket;
         try {
-            ticket = ice.inputElement(scanner, new Ticket(), scanner.script());
+            ticket = InputCollectionElement.inputElement(scanner, new Ticket(), scanner.script());
         } catch (WrongArgumentsException e) {
             ConsolePrinter.out("Update failed due: " + ConsolePrinter.YELLOW(e.getMessage()));
             return;
         }
-        ticket.setCreationDate(LocalDate.now());
-        ticket.getVenue().setId(GenerateID.generate(collection));
-        ticket.setId(ticketId);
+        InputCollectionElement.setID(collection, ticket);
         for (String s : collection.getCollection().keySet()) {
             if (collection.getCollection().get(s).getId() == ticketId) {
                 collection.getCollection().put(s, ticket);

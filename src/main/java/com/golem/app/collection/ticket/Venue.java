@@ -71,6 +71,7 @@ public class Venue implements Comparable<Venue>, ConsoleRead {
     @Override
     public int compareTo(Venue o) {
         int compare;
+        if (o == null) return 1;
         if ((compare = getName().compareTo(o.getName())) != 0) return compare;
         if ((compare = getCapacity().compareTo(o.getCapacity())) != 0) return compare;
         if ((compare = getAddress().compareTo(o.getAddress())) != 0) return compare;
