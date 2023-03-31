@@ -5,6 +5,11 @@ import java.io.FileInputStream;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ *
+ *
+ */
+
 public class ScriptInputer implements Input{
     private List<String> inputLines = new ArrayList<>();
     private static List<String> tail = new ArrayList<>();
@@ -35,6 +40,7 @@ public class ScriptInputer implements Input{
             ConsolePrinter.out(e.getMessage());
         }
     }
+
     public static void addTail (List <String> tail) {
         ScriptInputer.tail = tail;
         if (tail.size() > 0 && tail.get(tail.size()-1)==null) {

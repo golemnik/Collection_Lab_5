@@ -11,11 +11,23 @@ import com.golem.app.fileSystem.Input;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Выводит значение поля type всех элементов коллекции в порядке убывания.
+ */
 public class PrintFieldDescendingType implements Command {
     private final TicketCollection collection;
+
+    /**
+     * Конструктор команды print_field_descending_type.
+     * @param collection Объект для работы с коллекцией.
+     */
     public PrintFieldDescendingType (TicketCollection collection) {
         this.collection = collection;
     }
+
+    /**
+     * Метод process выполняет действия команды.
+     */
     @Override
     public void process() {
         List<Ticket> list = new ArrayList<>(collection.getCollection().values());
@@ -25,14 +37,22 @@ public class PrintFieldDescendingType implements Command {
         }
     }
 
+    /**
+     * Проверяет полученные аргументы на соответствие требуемому количеству.
+     * @return Текущую команду.
+     */
     @Override
     public Command args(List<String> args, Input inputer) throws WrongArgumentsException {
         if (args.size() != 0) throw  new WrongArgumentsException();
         return this;
     }
 
+    /**
+     * Содержит описание назначения команды.
+     * @return Описание команды в строковом представлении.
+     */
     @Override
     public String description() {
-        return "no args, todo desc";
+        return "display the value of the type field of all elements in descending order";
     }
 }

@@ -3,6 +3,10 @@ package com.golem.app;
 import com.golem.app.commandSystem.AppCycle;
 import com.golem.app.fileSystem.ConsolePrinter;
 
+/**
+ * Главный, запускающий всё приложение, класс.
+ * Из класса запускается основной цикл приема команд из строки ввода.
+ */
 public class Main {
     public static void main(String[] args) {
         if (args.length > 1) {

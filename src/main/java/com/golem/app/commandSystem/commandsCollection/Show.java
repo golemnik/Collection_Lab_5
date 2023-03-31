@@ -8,11 +8,23 @@ import com.golem.app.fileSystem.Input;
 
 import java.util.List;
 
+/**
+ * Все элементы коллекции в строковом представлении.
+ */
 public class Show implements Command {
     private final TicketCollection ticketCollection;
+
+    /**
+     * Конструктор команды show.
+     * @param ticketCollection Объект для работы с коллекцией.
+     */
     public Show (TicketCollection ticketCollection) {
         this.ticketCollection = ticketCollection;
     }
+
+    /**
+     * Метод process выполняет действия команды.
+     */
     @Override
     public void process() {
         if (ticketCollection.getCollection().size() == 0) {
@@ -31,12 +43,20 @@ public class Show implements Command {
         ConsolePrinter.out(temp);
     }
 
+    /**
+     * Проверяет полученные аргументы на соответствие требуемому количеству.
+     * @return Текущую команду.
+     */
     @Override
     public Command args(List<String> args, Input inputer) throws WrongArgumentsException {
         if (args.size() != 0) throw  new WrongArgumentsException();
         return this;
     }
 
+    /**
+     * Содержит описание назначения команды.
+     * @return Описание команды в строковом представлении.
+     */
     @Override
     public String description() {
         return "shows information about current elements collection hold on.s";

@@ -13,13 +13,25 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * Обновить значение элемента коллекции по заданному id
+ */
 public class UpdateId implements Command {
     private final TicketCollection collection;
     private int ticketId;
     private Input scanner;
+
+    /**
+     * Конструктор команды update.
+     * @param collection Объект для работы с коллекцией.
+     */
     public UpdateId (TicketCollection collection) {
         this.collection = collection;
     }
+
+    /**
+     * Метод process выполняет действия команды.
+     */
     @Override
     public void process() {
         Ticket ticket;
@@ -37,6 +49,11 @@ public class UpdateId implements Command {
             }
         }
     }
+
+    /**
+     * Проверяет полученные аргументы на соответствие требуемому количеству.
+     * @return Текущую команду.
+     */
     @Override
     public Command args(List<String> args, Input inputer) throws WrongArgumentsException {
         if (args.size() != 1) throw new WrongArgumentsException();
@@ -56,6 +73,10 @@ public class UpdateId implements Command {
         throw new WrongArgumentsException("Current collection element for this id doesn't exist.");
     }
 
+    /**
+     * Содержит описание назначения команды.
+     * @return Описание команды в строковом представлении.
+     */
     @Override
     public String description() {
         return "cause user to add new element to current collection.";

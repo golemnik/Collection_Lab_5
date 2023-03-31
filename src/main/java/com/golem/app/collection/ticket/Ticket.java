@@ -32,6 +32,7 @@ public class Ticket implements Comparable <Ticket>, ConsoleRead {
     public int getId() {
         return id;
     }
+
     /**
      * Ticket name
      * -not null @see
@@ -76,6 +77,7 @@ public class Ticket implements Comparable <Ticket>, ConsoleRead {
     public Coordinates getCoordinates() {
         return coordinates;
     }
+
     /**
      * Creation date
      * -not null

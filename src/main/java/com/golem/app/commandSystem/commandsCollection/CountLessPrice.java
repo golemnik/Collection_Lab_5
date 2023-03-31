@@ -8,13 +8,25 @@ import com.golem.app.fileSystem.Input;
 
 import java.util.List;
 
+/**
+ * Вывести количество элементов, значение поля price которых меньше заданного.
+ */
 public class CountLessPrice implements Command {
 
     private final TicketCollection collection;
     private Double ticketPrice = null;
+
+    /**
+     * Конструктор команды count_less_than_price.
+     * @param collection Объект для работы с коллекцией.
+     */
     public CountLessPrice (TicketCollection collection) {
         this.collection = collection;
     }
+
+    /**
+     * Метод process выполняет действия команды.
+     */
     @Override
     public void process() {
         int counter = 0;
@@ -26,6 +38,10 @@ public class CountLessPrice implements Command {
                 ConsolePrinter.PURPLE(String.valueOf(counter)));
     }
 
+    /**
+     * Проверяет полученные аргументы на соответствие требуемому количеству.
+     * @return Текущую команду.
+     */
     @Override
     public Command args(List<String> args, Input inputer) throws WrongArgumentsException {
         if (args.size() != 1) throw new WrongArgumentsException();
@@ -40,8 +56,13 @@ public class CountLessPrice implements Command {
         return this;
     }
 
+    /**
+     * Содержит описание назначения команды.
+     * @return Описание команды в строковом представлении.
+     */
     @Override
     public String description() {
-        return null;
+        return "display the number of elements whose" +
+                " price field value is less than the specified one";
     }
 }
