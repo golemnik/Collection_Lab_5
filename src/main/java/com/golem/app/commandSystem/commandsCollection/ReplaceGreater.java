@@ -13,16 +13,25 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * Замена значения по ключу, если новое значение больше старого
+ */
 public class ReplaceGreater implements Command {
-
     private final TicketCollection collection;
     private Input scanner;
     private String ticketKey;
 
+    /**
+     * Конструктор команды replace_if_greater.
+     * @param collection Объект для работы с коллекцией.
+     */
     public ReplaceGreater (TicketCollection collection) {
         this.collection = collection;
     }
 
+    /**
+     * Метод process выполняет действия команды.
+     */
     @Override
     public void process() {
         Ticket ticket;
@@ -38,6 +47,10 @@ public class ReplaceGreater implements Command {
         }
     }
 
+    /**
+     * Проверяет полученные аргументы на соответствие требуемому количеству.
+     * @return Текущую команду.
+     */
     @Override
     public Command args(List<String> args, Input inputer) throws WrongArgumentsException {
         if (args.size() != 1) throw new WrongArgumentsException();
@@ -49,6 +62,10 @@ public class ReplaceGreater implements Command {
         throw new WrongArgumentsException("Collection element for this id doesn't exist.");
     }
 
+    /**
+     * Содержит описание назначения команды.
+     * @return Описание команды в строковом представлении.
+     */
     @Override
     public String description() {
         return "replace element that user will input if it is greater.";

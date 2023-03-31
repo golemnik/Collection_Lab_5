@@ -12,13 +12,24 @@ import com.golem.app.fileSystem.Input;
 import java.time.LocalDate;
 import java.util.List;
 
+/**
+ * Удалить из коллекции все элементы выше заданного
+ */
 public class RemoveGreater implements Command {
     private final TicketCollection collection;
     private Input scanner;
+
+    /**
+     * Конструктора команды remove_greater.
+     * @param collection Объект для работы с коллекцией.
+     */
     public RemoveGreater (TicketCollection collection) {
         this.collection = collection;
     }
 
+    /**
+     * Метод process выполняет действия команды.
+     */
     @Override
     public void process() {
         Ticket ticket;
@@ -32,6 +43,10 @@ public class RemoveGreater implements Command {
         collection.getCollection().values().removeIf(t -> t.compareTo(ticket) > 0);
     }
 
+    /**
+     * Проверяет полученные аргументы на соответствие требуемому количеству.
+     * @return Текущую команду.
+     */
     @Override
     public Command args(List<String> args, Input inputer) throws WrongArgumentsException {
         if (args.size() != 1) throw new WrongArgumentsException();
@@ -40,6 +55,10 @@ public class RemoveGreater implements Command {
         return this;
     }
 
+    /**
+     * Содержит описание назначения команды.
+     * @return Описание команды в строковом представлении.
+     */
     @Override
     public String description() {
         return "remove element greater than user will input.";

@@ -35,6 +35,7 @@ public class ConsolePrinter {
     public static final String WHITE (String message) {
         return ANSI_WHITE + message + ANSI_RESET;
     }
+
     public static void out(String message) {
         System.out.println(message);
     }

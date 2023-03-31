@@ -15,6 +15,12 @@ public class ConsoleInputer implements Input {
 
     @Override
     public String input() {
-        return scanner.nextLine();
+        if (scanner.hasNextLine()) {
+            return scanner.nextLine();
+        }
+        else {
+            System.exit(0);
+            return "";
+        }
     }
 }

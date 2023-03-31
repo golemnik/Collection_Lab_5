@@ -3,6 +3,7 @@ package com.golem.app.collection.ticket;
 import com.golem.app.collection.ConsoleRead;
 
 public class Address implements Comparable <Address>, ConsoleRead {
+
     /**
      * Address where to go with ticket
      * -can be null

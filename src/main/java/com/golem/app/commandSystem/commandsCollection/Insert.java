@@ -10,13 +10,25 @@ import com.golem.app.fileSystem.Input;
 
 import java.util.List;
 
+/**
+ * Добавить новый элемент с заданным ключом.
+ */
 public class Insert implements Command {
     private final TicketCollection collection;
     private String ticketKey = null;
     private Input scanner;
+
+    /**
+     * Конструктора команды insert.
+     * @param collection Объект для работы с коллекцией.
+     */
     public Insert (TicketCollection collection) {
         this.collection = collection;
     }
+
+    /**
+     * Метод process выполняет действия команды.
+     */
     @Override
     public void process() {
         Ticket ticket;
@@ -29,6 +41,11 @@ public class Insert implements Command {
         InputCollectionElement.setID(collection, ticket);
         collection.getCollection().put(ticketKey, ticket);
     }
+
+    /**
+     * Проверяет полученные аргументы на соответствие требуемому количеству.
+     * @return Текущую команду.
+     */
     @Override
     public Command args(List<String> args, Input inputer) throws WrongArgumentsException {
         if (args.size() != 1) throw new WrongArgumentsException();
@@ -39,6 +56,11 @@ public class Insert implements Command {
         scanner = inputer;
         return this;
     }
+
+    /**
+     * Содержит описание назначения команды.
+     * @return Описание команды в строковом представлении.
+     */
     @Override
     public String description() {
         return "cause user to add new element to current collection.";

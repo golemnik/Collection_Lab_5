@@ -14,6 +14,11 @@ public class AppCycle {
     private final CommandCreator creator;
     private final Input inputer;
     private final ConsoleInputer consoleInputer = new ConsoleInputer();
+
+    /**
+     * Конструктор, производящий первичную загрузку данных из json файла.
+     * @param file Файл из которого будет производиться чтение.
+     */
     public AppCycle (String file) {
         inputer = new ConsoleInputer();
         TicketCollection ticketCollection = new TicketCollection();
@@ -54,6 +59,9 @@ public class AppCycle {
         creator = new CommandCreator(file, ticketCollection);
     }
 
+    /**
+     * Основной цикл выполнения команд пользовательского ввода.
+     */
     public void globalCycle () {
         while (true) {
             try {

@@ -12,13 +12,25 @@ import com.golem.app.fileSystem.Input;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * Вывести элементы, значение поля venue который больше заданного.
+ */
 public class FilterGreaterVenue implements Command {
     private final TicketCollection collection;
     private final InputCollectionElement ice = new InputCollectionElement();
     private Input scanner;
+
+    /**
+     * Конструктора команды filter_greater_than_venue.
+     * @param collection Объект для работы с коллекцией.
+     */
     public FilterGreaterVenue (TicketCollection collection) {
         this.collection = collection;
     }
+
+    /**
+     * Метод process выполняет действия команды.
+     */
     @Override
     public void process() {
         Venue venue;
@@ -38,6 +50,10 @@ public class FilterGreaterVenue implements Command {
         }
     }
 
+    /**
+     * Проверяет полученные аргументы на соответствие требуемому количеству.
+     * @return Текущую команду.
+     */
     @Override
     public Command args(List<String> args, Input inputer) throws WrongArgumentsException {
         if (args.size() != 0) throw  new WrongArgumentsException();
@@ -45,8 +61,12 @@ public class FilterGreaterVenue implements Command {
         return this;
     }
 
+    /**
+     * Содержит описание назначения команды.
+     * @return Описание команды в строковом представлении.
+     */
     @Override
     public String description() {
-        return "no args, todo desc";
+        return "display elements whose venue field value is greater than the given one.";
     }
 }

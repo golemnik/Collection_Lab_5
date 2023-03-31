@@ -21,6 +21,12 @@ public class CommandCreator {
     private final LinkedHashMap<String, Command> commands = new LinkedHashMap<>();
     private ArrayList<String> openedScripts = new ArrayList<>();
     private Boolean script = false;
+
+    /**
+     * Конструктор, который содержит информацию о командах и объектах одноименных классов.
+     * @param file Передает информацию о файле для выгрузки.
+     * @param ticketCollection Передает текущую коллекцию.
+     */
     public CommandCreator (String file, TicketCollection ticketCollection) {
         commands.put("help", new Help(commands));
         commands.put("exit", new Exit());
@@ -40,6 +46,12 @@ public class CommandCreator {
         commands.put("execute_script", new ExecuteScript(openedScripts, this));
     }
 
+    /**
+     * Метод, преобразующий пользовательский ввод в команду для исполнения.
+     * @param string Введенная пользователем информация.
+     * @param inputer Информация о том, откуда команда к нам пришла. (консоль/скрипт)
+     * @return Команду, проверенную на правильность аргументов
+     */
     public Command create (String string, Input inputer) throws WrongCommandException, WrongArgumentsException, OpenedScriptFileException {
         List<String> input = new ArrayList<>(Arrays.asList(string.trim().split(" ")));
         if (commands.get(input.get(0)) == null) {

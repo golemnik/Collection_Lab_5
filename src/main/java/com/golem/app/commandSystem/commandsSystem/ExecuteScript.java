@@ -54,6 +54,11 @@ public class ExecuteScript implements Command {
         scriptInputer = new ScriptInputer(file);
         return this;
     }
+
+    /**
+     * Содержит описание назначения команды.
+     * @return Описание команды в строковом представлении.
+     */
     @Override
     public String description() {
         return null;

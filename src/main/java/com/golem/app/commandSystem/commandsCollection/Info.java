@@ -8,13 +8,26 @@ import com.golem.app.fileSystem.Input;
 
 import java.util.List;
 
+/**
+ * Вывод информации о коллекции (тип, дата иниц., количество элементов)
+ */
 public class Info implements Command {
     private final TicketCollection ticketCollection;
     private boolean showElements;
+
+    /**
+     * Конструктор команды info.
+     * @param ticketCollection Объект для работы с коллекцией.
+     * @param showElements Получение текущих элементов коллекции.
+     */
     public Info (TicketCollection ticketCollection, boolean showElements) {
         this.ticketCollection = ticketCollection;
         this.showElements = showElements;
     }
+
+    /**
+     * Метод process выполняет действия команды.
+     */
     @Override
     public void process() {
         String temp = "";
@@ -35,6 +48,10 @@ public class Info implements Command {
         ConsolePrinter.out(ticketCollection.toReadString()+temp);
     }
 
+    /**
+     * Проверяет полученные аргументы на соответствие требуемому количеству.
+     * @return Текущую команду.
+     */
     @Override
     public Command args(List<String> args, Input inputer) throws WrongArgumentsException {
         if (args.size() > 1) throw new WrongArgumentsException();
@@ -48,6 +65,11 @@ public class Info implements Command {
         }
         return this;
     }
+
+    /**
+     * Содержит описание назначения команды.
+     * @return Описание команды в строковом представлении.
+     */
     @Override
     public String description() {
         return "shows information for current collection." +
