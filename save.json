@@ -1,0 +1,76 @@
+{
+  "creationDate": "2023-03-29",
+  "collection": {
+    "123": {
+      "id": 754507231,
+      "name": "123",
+      "coordinates": {
+        "x": 123,
+        "y": 123
+      },
+      "creationDate": "2023-03-29",
+      "price": 123.0,
+      "comment": "123",
+      "type": "VIP",
+      "venue": {
+        "id": 754507230,
+        "name": "123",
+        "capacity": 123,
+        "type": "BAR",
+        "address": {
+          "street": "123"
+        }
+      }
+    },
+    "1234": {
+      "id": 754507231,
+      "name": "aagagagag",
+      "coordinates": {
+        "x": 123,
+        "y": 123
+      },
+      "creationDate": "2023-03-29",
+      "price": 123.0,
+      "comment": "123",
+      "type": "VIP",
+      "venue": {
+        "id": 754507230,
+        "name": "123",
+        "capacity": 123,
+        "type": "BAR",
+        "address": {
+          "street": "123"
+        }
+      }
+    },
+    "43": {
+      "id": 1004323573,
+      "name": "43",
+      "coordinates": {
+        "x": 43,
+        "y": 43
+      },
+      "creationDate": "2023-04-01",
+      "price": 43.0,
+      "comment": "43",
+      "type": "VIP"
+    },
+    "14": {
+      "id": 1004323573,
+      "name": "14",
+      "coordinates": {
+        "x": 14,
+        "y": 14
+      },
+      "creationDate": "2023-04-01",
+      "price": 14.0,
+      "comment": "14",
+      "type": "VIP",
+      "venue": {
+        "name": "14",
+        "capacity": 14,
+        "address": {}
+      }
+    }
+  }
+}

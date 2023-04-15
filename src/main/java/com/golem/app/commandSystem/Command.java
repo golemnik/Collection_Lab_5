@@ -7,7 +7,7 @@ import com.golem.app.fileSystem.Input;
 import java.util.List;
 
 /**
- * Интерфейс для всех команд. Определяет методы, которые необходимы для реализации команд.
+ * Interface for all commands, declare general methods.
  */
 
 public interface Command {

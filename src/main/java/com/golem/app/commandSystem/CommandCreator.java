@@ -11,7 +11,6 @@ import com.golem.app.commandSystem.commandsSystem.Save;
 import com.golem.app.commandSystem.commandsSystem.ExecuteScript;
 import com.golem.app.fileSystem.Input;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedHashMap;
@@ -44,12 +43,12 @@ public class CommandCreator {
         commands.put("filter_greater_than_venue", new FilterGreaterVenue(ticketCollection));
         commands.put("print_field_type", new PrintFieldDescendingType(ticketCollection));
         commands.put("execute_script", new ExecuteScript(openedScripts, this));
-    }
+    }// todo factory/builder
 
     /**
      * Метод, преобразующий пользовательский ввод в команду для исполнения.
      * @param string Введенная пользователем информация.
-     * @param inputer Информация о том, откуда команда к нам пришла. (консоль/скрипт)
+     * @param inputer information о том, откуда команда к нам пришла. (консоль/скрипт)
      * @return Команду, проверенную на правильность аргументов
      */
     public Command create (String string, Input inputer) throws WrongCommandException, WrongArgumentsException, OpenedScriptFileException {

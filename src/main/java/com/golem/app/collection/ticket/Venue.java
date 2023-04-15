@@ -81,12 +81,19 @@ public class Venue implements Comparable<Venue>, ConsoleRead {
 
     @Override
     public String toReadString() {
+        String a;
+        if (address != null) {
+            a = address.toReadString();
+        }
+        else {
+            a = null;
+        }
         return "Venue >>\n" +
                 "   id: " + id + "\n"+
                 "   name: " + name + "\n"+
                 "   capacity: " + capacity + "\n"+
                 "   type: " + type + "\n"+
-                address.toReadString();
+                a;
     }
 
     public enum VenueType {

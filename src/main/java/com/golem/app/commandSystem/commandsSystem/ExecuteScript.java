@@ -9,11 +9,9 @@ import com.golem.app.fileSystem.Input;
 import com.golem.app.fileSystem.ScriptInputer;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class ExecuteScript implements Command {
-    private String file;
     private final List<String> openedScripts;
     private final List <String> commandsQueue = new ArrayList<>();
     private final CommandCreator creator;
@@ -48,7 +46,7 @@ public class ExecuteScript implements Command {
                 throw new OpenedScriptFileException();
             }
         }
-        file = args.get(0);
+        String file = args.get(0);
         openedScripts.add(file);
         ScriptInputer.addTail(commandsQueue);
         scriptInputer = new ScriptInputer(file);

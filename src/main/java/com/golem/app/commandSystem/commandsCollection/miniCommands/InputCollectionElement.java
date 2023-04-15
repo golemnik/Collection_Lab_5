@@ -11,13 +11,30 @@ import com.golem.app.fileSystem.Input;
 
 import java.time.LocalDate;
 
+/**
+ * subcommand class for inputting ticket information from user or script
+ */
 public class InputCollectionElement {
+    /**
+     * set id for ticket and it's venue
+     * @param collection - ticket collection
+     * @param ticket - current ticket
+     */
     public static void setID (TicketCollection collection, Ticket ticket) {
+        ticket.setId(GenerateID.generate(collection));
         if (ticket.getVenue() != null) {
             ticket.getVenue().setId(GenerateID.generate(collection));
         }
-        ticket.setId(GenerateID.generate(collection));
     }
+
+    /**
+     *
+     * @param scanner - class for choose input stream - script or console
+     * @param ticket
+     * @param comment
+     * @return
+     * @throws WrongArgumentsException
+     */
     public static Ticket inputElement(Input scanner, Ticket ticket, boolean comment) throws WrongArgumentsException {
         ticket.setCreationDate(LocalDate.now());
 
@@ -285,20 +302,19 @@ public class InputCollectionElement {
             for (Venue.VenueType t : Venue.VenueType.values()) {
                 temp += "   " + ConsolePrinter.PURPLE(t.toString()) + "\n";
             }
-            temp += ConsolePrinter.PURPLE("null") + "\n";
+            temp += "   " + ConsolePrinter.PURPLE("null") + "\n";
             ConsolePrinter.out("Choose type for this ticket's venue. It can be one from the following list:\n" +
                     temp + "Write chosen type:");
         }
         do {
             String value = scanner.input();
+            if (value.isEmpty()) {
+                venue.setType(null);
+                return;
+            }
             try {
                 venue.setType(Venue.VenueType.valueOf(value));
                 comment = false;
-            }
-            catch (NullPointerException e) {
-                if (value == null) {
-                    venue.setType(null);
-                }
             }
             catch (Exception e) {
                 if (comment) {
@@ -318,10 +334,12 @@ public class InputCollectionElement {
         do {
             try {
                 String value = scanner.input();
-                if (value == null) {
-                    throw new WrongArgumentsException("Unsupported string for name. Try again.");
+                if (value.isEmpty()) {
+                    address.setStreet(null);
                 }
-                address.setStreet(value);
+                else {
+                    address.setStreet(value);
+                }
                 comment = false;
             }
             catch (Exception e) {

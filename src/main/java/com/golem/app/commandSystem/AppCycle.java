@@ -1,6 +1,7 @@
 package com.golem.app.commandSystem;
 
 import com.golem.app.collection.TicketCollection;
+import com.golem.app.commandSystem.commandsCollection.miniCommands.DuplicateUnload;
 import com.golem.app.fileSystem.ConsoleInputer;
 import com.golem.app.fileSystem.ConsolePrinter;
 import com.golem.app.fileSystem.Input;
@@ -54,6 +55,7 @@ public class AppCycle {
                 System.exit(1);
             }
         }
+        DuplicateUnload.dupUnload(ticketCollection);
         ConsolePrinter.out("Init collection state:" +
                 ticketCollection.toReadString());
         creator = new CommandCreator(file, ticketCollection);

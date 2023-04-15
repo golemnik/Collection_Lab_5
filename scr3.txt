@@ -1,0 +1,2 @@
+info false
+execute_script scr3.txt

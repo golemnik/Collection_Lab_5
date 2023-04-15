@@ -40,6 +40,7 @@ public class Insert implements Command {
         }
         InputCollectionElement.setID(collection, ticket);
         collection.getCollection().put(ticketKey, ticket);
+
     }
 
     /**
